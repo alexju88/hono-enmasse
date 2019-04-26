@@ -1,0 +1,126 @@
+[
+  ["router", {
+    "id": "Hono.Example.Router",
+    "mode": "standalone",
+    "workerThreads": 3
+  }],
+
+  ["authServicePlugin", {
+    "name": "Hono Auth",
+    "host": "hono-service-auth.hono-test",
+    "port": 5671,
+    "sslProfile": "internal"
+  }],
+
+  ["sslProfile", {
+    "name": "external",
+    "caCertFile": "/etc/hono/trusted-certs.pem",
+    "certFile": "/etc/hono/qdrouter-cert.pem",
+    "privateKeyFile": "/etc/hono/qdrouter-key.pem"
+  }],
+
+  ["sslProfile", {
+    "name": "internal",
+    "caCertFile": "/etc/hono/trusted-certs.pem",
+    "certFile": "/etc/hono/qdrouter-cert.pem",
+    "privateKeyFile": "/etc/hono/qdrouter-key.pem",
+    "uidFormat": "ou"
+  }],
+
+  ["listener", {
+    "sslProfile": "external",
+    "requireSsl": true,
+    "host": "0.0.0.0",
+    "port": 5671,
+    "authenticatePeer": true,
+    "saslMechanisms": "PLAIN",
+    "saslPlugin": "Hono Auth"
+  }],
+
+  ["listener", {
+    "host": "0.0.0.0",
+    "port": 5672,
+    "authenticatePeer": true,
+    "saslMechanisms": "PLAIN",
+    "saslPlugin": "Hono Auth"
+  }],
+
+  ["listener", {
+    "sslProfile": "internal",
+    "requireSsl": true,
+    "host": "0.0.0.0",
+    "port": 5673,
+    "authenticatePeer": true,
+    "saslMechanisms": "EXTERNAL"
+  }],
+
+  ["connector", {
+    "sslProfile": "external",
+    "name": "broker",
+    "host": "messaging-0xi8553fe8.hono-test",
+    "port": 5671,
+    "role": "route-container",
+    "saslUsername": "admin",
+    "saslPassword": "bosch_iot_inst_2019"
+  }],
+
+  ["linkRoute", {
+    "prefix": "event/",
+    "direction": "in",
+    "connection": "broker"
+  }],
+
+  ["linkRoute", {
+    "prefix": "event/",
+    "direction": "out",
+    "connection": "broker"
+  }],
+
+  ["address", {
+    "prefix": "telemetry/",
+    "distribution": "balanced"
+  }],
+
+  ["policy", {
+    "maxConnections": 1000,
+    "enableVhostPolicy": true,
+    "defaultVhost": "hono"
+  }],
+
+  ["vhost", {
+      "hostname": "hono",
+      "maxConnections": 500,
+      "maxConnectionsPerUser": 20,
+      "maxConnectionsPerHost": 10,
+      "allowUnknownUser": true,
+      "groups": {
+        "$default": {
+          "remoteHosts": "*",
+          "maxSessions": 10
+        }
+      }
+  }],
+
+  ["vhost", {
+      "hostname": "hono-internal",
+      "maxConnections": 50,
+      "groups": {
+        "Hono": {
+          "users": "Eclipse IoT;Hono",
+          "remoteHosts": "*",
+          "maxSessions": 4,
+          "maxFrameSize": 16384,
+          "maxSessionWindow": 6553600,
+          "maxMessageSize": 131072,
+          "allowUserIdProxy": true,
+          "sources": "control/*",
+          "targets": "telemetry/*, event/*, control/*"
+        }
+      }
+  }],
+
+  ["log", {
+    "module": "DEFAULT",
+    "enable": "info+"
+  }]
+]

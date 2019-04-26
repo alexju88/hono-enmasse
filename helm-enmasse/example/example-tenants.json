@@ -1,0 +1,36 @@
+[
+  {
+    "tenant-id": "DEFAULT_TENANT",
+    "trusted-ca": {
+      "subject-dn": "${trusted-ca.subject-dn}",
+      "public-key": "${trusted-ca.public-key}"
+    },
+    "enabled": true
+  },
+  {
+    "tenant-id": "HTTP_TENANT",
+    "enabled": true,
+    "adapters": [
+      {
+        "type": "hono-http",
+        "enabled": true,
+        "device-authentication-required": true
+      },
+      {
+        "type": "hono-mqtt",
+        "enabled": false,
+        "device-authentication-required": true
+      },
+      {
+        "type": "hono-kura",
+        "enabled": false,
+        "device-authentication-required": true
+      },
+      {
+        "type": "hono-coap",
+        "enabled": false,
+        "device-authentication-required": true
+      }
+    ]
+  }
+]

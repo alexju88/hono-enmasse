@@ -1,0 +1,17 @@
+# Default values for eclipse-hono.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+project:
+  groupId: org.eclipse.hono
+
+defaultJavaOptions: -XX:MinRAMPercentage=80 -XX:MaxRAMPercentage=80
+
+
+# the port that the Hono components' health check resources are exposed at
+healthCheckPort: 8088
+
+# whether we are deploying to OpenShift (true) or plain Kubernetes (false)
+# this flag is used to determine whether we need to deploy Route resources as well
+openshift: false
+

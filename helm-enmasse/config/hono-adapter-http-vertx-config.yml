@@ -1,0 +1,37 @@
+hono:
+  app:
+    maxInstances: 1
+    healthCheckPort: 8088
+    healthCheckBindAddress: 0.0.0.0
+  http:
+    bindAddress: 0.0.0.0
+    insecurePortBindAddress: 0.0.0.0
+    insecurePortEnabled: true
+    keyPath: /etc/hono/http-adapter-key.pem
+    certPath: /etc/hono/http-adapter-cert.pem
+  messaging:
+    name: 'Hono HTTP Adapter'
+    host: messaging-0xi8553fe8.hono-test
+    port: 5672
+  registration:
+    name: 'Hono HTTP Adapter'
+    host: hono-service-device-registry.hono-test
+    port: 5671
+    credentialsPath: /etc/hono/http-adapter.credentials
+    trustStorePath: /etc/hono/trusted-certs.pem
+  credentials:
+    name: 'Hono HTTP Adapter'
+    host: hono-service-device-registry.hono-test
+    port: 5671
+    credentialsPath: /etc/hono/http-adapter.credentials
+    trustStorePath: /etc/hono/trusted-certs.pem
+  tenant:
+    name: 'Hono HTTP Adapter'
+    host: hono-service-device-registry.hono-test
+    port: 5671
+    credentialsPath: /etc/hono/http-adapter.credentials
+    trustStorePath: /etc/hono/trusted-certs.pem
+  command:
+    name: 'Hono HTTP Adapter'
+    host: messaging-0xi8553fe8.hono-test
+    port: 5672

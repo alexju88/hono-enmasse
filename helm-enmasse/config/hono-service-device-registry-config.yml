@@ -1,0 +1,38 @@
+hono:
+  app:
+    maxInstances: 1
+    healthCheckBindAddress: 0.0.0.0
+    healthCheckPort: 8088
+  auth:
+    host: hono-service-auth.hono-test
+    port: 5671
+    keyPath: /etc/hono/device-registry-key.pem
+    certPath: /etc/hono/device-registry-cert.pem
+    trustStorePath: /etc/hono/trusted-certs.pem
+    name: 'Hono Device Registry'
+    validation:
+      certPath: /etc/hono/auth-server-cert.pem
+  registry:
+    amqp:
+      bindAddress: 0.0.0.0
+      keyPath: /etc/hono/device-registry-key.pem
+      certPath: /etc/hono/device-registry-cert.pem
+    rest:
+      bindAddress: 0.0.0.0
+      keyPath: /etc/hono/device-registry-key.pem
+      certPath: /etc/hono/device-registry-cert.pem
+      insecurePortBindAddress: 0.0.0.0
+      insecurePortEnabled: true
+    svc:
+      filename: /var/lib/hono/device-registry/device-identities.json
+      saveToFile: true
+      signing:
+        sharedSecret: g#aWO!BUm7aj*#%X*VGXKFhxkhNrMNj0
+  credentials:
+    svc:
+      filename: /var/lib/hono/device-registry/credentials.json
+      saveToFile: true
+  tenant:
+    svc:
+      filename: /var/lib/hono/device-registry/tenants.json
+      saveToFile: true
