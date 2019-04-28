@@ -12,7 +12,9 @@ hono:
   messaging:
     name: 'Hono HTTP Adapter'
     host: messaging-0xi8553fe8.hono-test
-    port: 5672
+    port: 5672 
+    username: hono
+    password: hono_iot_2019
   registration:
     name: 'Hono HTTP Adapter'
     host: hono-service-device-registry.hono-test
@@ -35,3 +37,5 @@ hono:
     name: 'Hono HTTP Adapter'
     host: messaging-0xi8553fe8.hono-test
     port: 5672
+    username: hono
+    password: hono_iot_2019

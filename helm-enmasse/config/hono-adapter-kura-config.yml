@@ -9,10 +9,6 @@ hono:
     insecurePortEnabled: true
     keyPath: /etc/hono/kura-adapter-key.pem
     certPath: /etc/hono/kura-adapter-cert.pem
-  messaging:
-    name: 'Hono Kura Adapter'
-    host: messaging-0xi8553fe8.hono-test
-    port: 5672
   registration:
     name: 'Hono Kura Adapter'
     host: hono-service-device-registry.hono-test
@@ -31,10 +27,18 @@ hono:
     port: 5671
     credentialsPath: /etc/hono/kura-adapter.credentials
     trustStorePath: /etc/hono/trusted-certs.pem
+  messaging:
+    name: 'Hono HTTP Adapter'
+    host: messaging-0xi8553fe8.hono-test
+    port: 5672 
+    username: hono
+    password: hono_iot_2019
   command:
-    name: 'Hono Kura Adapter'
+    name: 'Hono HTTP Adapter'
     host: messaging-0xi8553fe8.hono-test
     port: 5672
+    username: hono
+    password: hono_iot_2019
   metrics:
     legacy: true
 
