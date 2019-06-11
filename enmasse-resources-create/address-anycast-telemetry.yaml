@@ -1,0 +1,8 @@
+apiVersion: enmasse.io/v1beta1
+kind: Address
+metadata:
+    name: defaulttenant.telemetry
+spec:
+    address: telemetry
+    type: anycast
+    plan: standard-medium-anycast

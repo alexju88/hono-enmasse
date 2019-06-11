@@ -1,0 +1,8 @@
+apiVersion: enmasse.io/v1beta1
+kind: Address
+metadata:
+    name: defaulttenant.event
+spec:
+    address: event
+    type: queue
+    plan: standard-small-queue

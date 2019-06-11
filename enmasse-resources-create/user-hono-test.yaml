@@ -1,0 +1,12 @@
+apiVersion: user.enmasse.io/v1beta1
+kind: MessagingUser
+metadata:
+  name: defaulttenant.hono
+spec:
+  username: honotest
+  authentication:
+    type: password
+    password: Ym9zY2hfaW90X2luc3RfMjAxOQ== # Base64 encoded bosch_iot_inst_2019 
+  authorization:
+    - addresses: ["*"]
+      operations: ["send","recv","view","manage"]
